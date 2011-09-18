@@ -6,23 +6,28 @@ Created by Michael Dory | doryexmachina on 2011-09-18.
 """
 
 import serial
-import sys
 import os
 
+# define the arduino's location and listening speed
 arduinoPort = '/dev/tty.usbmodemfd131'
 arduinoSpeed = '9600'
-ser = serial.Serial('/dev/tty.usbmodemfd131', '9600')
 
-# this is where the magic happens
+# start it all up 
+# (with aruments here for when I get off my butt and add command line parsing)
 def main(arduinoPort,arduinoSpeed,arguments=None):
-		
+	
+	#	open up the serial port
 	ser = serial.Serial(arduinoPort, arduinoSpeed)
 	
+	#
 	while 1:
 		val = ser.readline()
 		if (val == 'deploy!'):
 			#print val
 			print 'Preparing to deploy!'
+			os.system('git commit -am "this was deployed by an Arduino!"')
+			os.system('git push heroku master')
+			
 
 # do that thang!
 if __name__ == "__main__":
