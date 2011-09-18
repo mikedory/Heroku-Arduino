@@ -26,7 +26,7 @@ def main(arduinoPort,arduinoSpeed,arguments=None):
 		#print(repr(val)[1:-1]) # print out the invisible characters (handy for debugging)
 
 		# if we get a 'd' from the arduino, a button was pressed
-		if (val == '.\r\n'):
+		if (val == 'd\r\n'):
 			
 			# deploy!
 			print 'Preparing to deploy!'
@@ -35,6 +35,7 @@ def main(arduinoPort,arduinoSpeed,arguments=None):
 
 			# wait a bit...
 			time.sleep(5) # hang out for five seconds
+			print 'All good!'
 			
 
 # do that thang!
