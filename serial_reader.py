@@ -22,11 +22,15 @@ def main(arduinoPort,arduinoSpeed,arguments=None):
 	#
 	while 1:
 		val = ser.readline()
-		if (val == 'deploy!'):
+		print val
+		print(repr(val)[1:-1])
+		if (val == '.\r\n'):
 			#print val
 			print 'Preparing to deploy!'
 			os.system('git commit -am "this was deployed by an Arduino!"')
 			os.system('git push heroku master')
+			print 'Preparing to deploy!'
+			exit()
 			
 
 # do that thang!
