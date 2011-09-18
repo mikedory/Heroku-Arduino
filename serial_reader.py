@@ -22,7 +22,7 @@ def main(arduinoPort,arduinoSpeed,arguments=None):
 		val = ser.readline()
 		if (val == 'deploy!'):
 			#print val
-			print 'heeere we go!'
+			print 'Preparing to deploy!'
 
 # do that thang!
 if __name__ == "__main__":
