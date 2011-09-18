@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-serial.py
+serial_reader.py
 Created by Michael Dory | doryexmachina on 2011-09-18.
 """
 
 import serial
 import os
+import time
 
 # define the arduino's location and listening speed
 arduinoPort = '/dev/tty.usbmodemfd131'
@@ -19,18 +20,21 @@ def main(arduinoPort,arduinoSpeed,arguments=None):
 	#	open up the serial port
 	ser = serial.Serial(arduinoPort, arduinoSpeed)
 	
-	#
+	# watch out for the right characters
 	while 1:
 		val = ser.readline()
-		print val
-		print(repr(val)[1:-1])
-		if (val == '.\r\n'):
-			#print val
+		#print(repr(val)[1:-1]) # print out the invisible characters (handy for debugging)
+
+		# if we get a 'd' from the arduino, a button was pressed
+		if (val == 'd\r\n'):
+			
+			# deploy!
 			print 'Preparing to deploy!'
 			os.system('git commit -am "this was deployed by an Arduino!"')
 			os.system('git push heroku master')
-			print 'Preparing to deploy!'
-			exit()
+
+			# wait a bit...
+			time.sleep(5) # hang out for five seconds
 			
 
 # do that thang!
