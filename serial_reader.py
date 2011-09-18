@@ -7,7 +7,7 @@ Created by Michael Dory | doryexmachina on 2011-09-18.
 
 import serial
 import sys
-import serial
+import os
 
 arduinoPort = '/dev/tty.usbmodemfd131'
 arduinoSpeed = '9600'
@@ -19,8 +19,10 @@ def main(arduinoPort,arduinoSpeed,arguments=None):
 	ser = serial.Serial(arduinoPort, arduinoSpeed)
 	
 	while 1:
-		ser.readline()
-	
+		val = ser.readline()
+		if (val == 'deploy!'):
+			#print val
+			print 'heeere we go!'
 
 # do that thang!
 if __name__ == "__main__":
