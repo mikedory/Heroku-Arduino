@@ -11,7 +11,10 @@ import os
 import time
 
 # sassy notification action
-from growlnotify import notify
+try:
+	from growlnotify import notify
+except ImportError:
+	notify = None
 
 # define the arduino's location and listening speed
 arduinoPort = '/dev/tty.usbmodemfd131'
@@ -36,7 +39,8 @@ def main(arduinoPort,arduinoSpeed,arguments=None):
 			print 'Preparing to deploy!'
 			os.system('git commit -am "this was deployed by an Arduino!"')
 			os.system('git push heroku master')
-			notify('Heroku Deployer','Code deployed to Heroku!')
+			if notify:
+				notify('Heroku Deployer','Code deployed to Heroku!')
 
 			# wait a bit...
 			time.sleep(5) # hang out for five seconds
