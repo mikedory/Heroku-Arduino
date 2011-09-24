@@ -5,9 +5,13 @@ serial_reader.py
 Created by Michael Dory | doryexmachina on 2011-09-18.
 """
 
+# the basics
 import serial
 import os
 import time
+
+# sassy notification action
+from growlnotify import notify
 
 # define the arduino's location and listening speed
 arduinoPort = '/dev/tty.usbmodemfd131'
@@ -32,11 +36,11 @@ def main(arduinoPort,arduinoSpeed,arguments=None):
 			print 'Preparing to deploy!'
 			os.system('git commit -am "this was deployed by an Arduino!"')
 			os.system('git push heroku master')
+			notify('Heroku Deployer','Code deployed to Heroku!')
 
 			# wait a bit...
 			time.sleep(5) # hang out for five seconds
 			print 'All good!'
-			
 
 # do that thang!
 if __name__ == "__main__":
